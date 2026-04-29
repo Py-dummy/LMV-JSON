@@ -1,0 +1,784 @@
+// 6482 --> 6500 TOKENS
+{
+    "video": {
+        "title": "Law of Cosines - Visual Proof",
+        "resolution": {
+            "width": 1920,
+            "height": 1080
+        },
+        "scenes": [
+            // ─── SCENE 0: Title card ────────────────────────────────
+            {
+                "name": "Title",
+                "duration": 3,
+                "background": "#0a0a14",
+                "elements": [
+                    {
+                        "id": "main_title",
+                        "type": "text",
+                        "content": "The Law of Cosines\n\nc² = a² + b² − 2ab·cos(γ)",
+                        "x": 0.5,
+                        "y": 0.5,
+                        "unit": "percent",
+                        "font": "Arial, sans-serif",
+                        "fontSize": 72,
+                        "color": "#e94560",
+                        "opacity": 1,
+                        "align": "center",
+                        "lineHeight": 1.3,
+                        "maxWidth": 1400
+                    },
+                    {
+                        "id": "subtitle",
+                        "type": "text",
+                        "content": "A visual journey through the most powerful triangle tool",
+                        "x": 0.5,
+                        "y": 0.75,
+                        "unit": "percent",
+                        "font": "Georgia, serif",
+                        "fontSize": 32,
+                        "color": "#a0a0b0",
+                        "opacity": 0,
+                        "align": "center"
+                    }
+                ],
+                "animations": [
+                    // Fade subtitle in after a brief pause
+                    {
+                        "target": "subtitle",
+                        "property": "opacity",
+                        "from": 0,
+                        "to": 1,
+                        "startDelay": 0.8,
+                        "duration": 1,
+                        "easing": "power2.out"
+                    },
+                    // Title gently shrinks to settle
+                    {
+                        "target": "main_title",
+                        "property": "fontSize",
+                        "from": 76,
+                        "to": 72,
+                        "startDelay": 0,
+                        "duration": 1.5,
+                        "easing": "elastic.out(1,0.5)"
+                    }
+                ]
+            },
+            // ─── SCENE 1: Build the triangle ────────────────────────
+            {
+                "name": "Triangle Construction",
+                "duration": 6,
+                "background": "#1a1a2e",
+                "elements": [
+                    // Sides as lines (using path, easy for LLM)
+                    {
+                        "id": "side_a",
+                        "type": "shape",
+                        "path": "M 200 800 L 600 800", // a (BC) horizontal
+                        "stroke": "#ffffff",
+                        "strokeWidth": 4,
+                        "opacity": 0
+                    },
+                    {
+                        "id": "side_b",
+                        "type": "shape",
+                        "path": "M 600 800 L 350 300", // b (CA) up-left
+                        "stroke": "#ffffff",
+                        "strokeWidth": 4,
+                        "opacity": 0
+                    },
+                    {
+                        "id": "side_c",
+                        "type": "shape",
+                        "path": "M 200 800 L 350 300", // c (AB) slanted
+                        "stroke": "#e94560",
+                        "strokeWidth": 6,
+                        "opacity": 0
+                    },
+                    // Vertex labels
+                    {
+                        "id": "label_A",
+                        "type": "text",
+                        "content": "A",
+                        "x": 140,
+                        "y": 820,
+                        "unit": "px",
+                        "font": "Arial",
+                        "fontSize": 36,
+                        "color": "#ffffff",
+                        "opacity": 0,
+                        "align": "center"
+                    },
+                    {
+                        "id": "label_B",
+                        "type": "text",
+                        "content": "B",
+                        "x": 360,
+                        "y": 270,
+                        "unit": "px",
+                        "font": "Arial",
+                        "fontSize": 36,
+                        "color": "#ffffff",
+                        "opacity": 0,
+                        "align": "center"
+                    },
+                    {
+                        "id": "label_C",
+                        "type": "text",
+                        "content": "C",
+                        "x": 640,
+                        "y": 820,
+                        "unit": "px",
+                        "font": "Arial",
+                        "fontSize": 36,
+                        "color": "#ffffff",
+                        "opacity": 0,
+                        "align": "center"
+                    },
+                    // Angle arc at C (γ) using a small circle segment or an arc shape; 
+                    // for simplicity, we use a text symbol placed near the vertex.
+                    {
+                        "id": "angle_arc",
+                        "type": "text",
+                        "content": "γ",
+                        "x": 580,
+                        "y": 760,
+                        "unit": "px",
+                        "font": "Georgia, serif",
+                        "fontSize": 28,
+                        "color": "#f0e68c",
+                        "opacity": 0,
+                        "align": "center"
+                    },
+                    // Dynamic formula that will appear later
+                    {
+                        "id": "formula",
+                        "type": "text",
+                        "content": "c² = a² + b² − 2ab cos(γ)",
+                        "x": 0.5,
+                        "y": 0.2,
+                        "unit": "percent",
+                        "font": "Arial",
+                        "fontSize": 40,
+                        "color": "#e94560",
+                        "opacity": 0,
+                        "align": "center"
+                    }
+                ],
+                "animations": [
+                    // Draw sides sequentially
+                    {
+                        "target": "side_a",
+                        "property": "opacity",
+                        "to": 1,
+                        "startDelay": 0.3,
+                        "duration": 0.6
+                    },
+                    {
+                        "target": "side_b",
+                        "property": "opacity",
+                        "to": 1,
+                        "startDelay": 0.8,
+                        "duration": 0.6
+                    },
+                    {
+                        "target": "side_c",
+                        "property": "opacity",
+                        "to": 1,
+                        "startDelay": 1.3,
+                        "duration": 0.6
+                    },
+                    // Show vertex labels
+                    {
+                        "target": "label_A",
+                        "property": "opacity",
+                        "to": 1,
+                        "startDelay": 2.0,
+                        "duration": 0.5
+                    },
+                    {
+                        "target": "label_B",
+                        "property": "opacity",
+                        "to": 1,
+                        "startDelay": 2.1,
+                        "duration": 0.5
+                    },
+                    {
+                        "target": "label_C",
+                        "property": "opacity",
+                        "to": 1,
+                        "startDelay": 2.2,
+                        "duration": 0.5
+                    },
+                    // Show angle gamma
+                    {
+                        "target": "angle_arc",
+                        "property": "opacity",
+                        "to": 1,
+                        "startDelay": 2.6,
+                        "duration": 0.4
+                    },
+                    // Flash side c to highlight it
+                    {
+                        "target": "side_c",
+                        "property": "stroke",
+                        "from": "#e94560",
+                        "to": "#ffaa00",
+                        "startDelay": 3.2,
+                        "duration": 0.3
+                    },
+                    {
+                        "target": "side_c",
+                        "property": "stroke",
+                        "from": "#ffaa00",
+                        "to": "#e94560",
+                        "startDelay": 3.5,
+                        "duration": 0.3
+                    },
+                    // Bring in the formula at the top
+                    {
+                        "target": "formula",
+                        "property": "opacity",
+                        "to": 1,
+                        "startDelay": 4.5,
+                        "duration": 0.8,
+                        "easing": "power2.out"
+                    }
+                ]
+            },
+            // ─── SCENE 2: Label side lengths ────────────────────────
+            {
+                "name": "Side Annotations",
+                "duration": 4,
+                "background": "#1a1a2e",
+                // We inherit the same triangle elements visually; for a real renderer 
+                // you'd reuse elements, but here we recreate them for simplicity.
+                "elements": [
+                    // Same triangle shapes (same IDs as before because each scene is independent)
+                    {
+                        "id": "side_a",
+                        "type": "shape",
+                        "path": "M 200 800 L 600 800",
+                        "stroke": "#ffffff",
+                        "strokeWidth": 4,
+                        "opacity": 1
+                    },
+                    {
+                        "id": "side_b",
+                        "type": "shape",
+                        "path": "M 600 800 L 350 300",
+                        "stroke": "#ffffff",
+                        "strokeWidth": 4,
+                        "opacity": 1
+                    },
+                    {
+                        "id": "side_c",
+                        "type": "shape",
+                        "path": "M 200 800 L 350 300",
+                        "stroke": "#e94560",
+                        "strokeWidth": 6,
+                        "opacity": 1
+                    },
+                    // Labels A, B, C
+                    {
+                        "id": "label_A",
+                        "type": "text",
+                        "content": "A",
+                        "x": 140,
+                        "y": 820,
+                        "unit": "px",
+                        "font": "Arial",
+                        "fontSize": 36,
+                        "color": "#ffffff",
+                        "opacity": 1
+                    },
+                    {
+                        "id": "label_B",
+                        "type": "text",
+                        "content": "B",
+                        "x": 360,
+                        "y": 270,
+                        "unit": "px",
+                        "font": "Arial",
+                        "fontSize": 36,
+                        "color": "#ffffff",
+                        "opacity": 1
+                    },
+                    {
+                        "id": "label_C",
+                        "type": "text",
+                        "content": "C",
+                        "x": 640,
+                        "y": 820,
+                        "unit": "px",
+                        "font": "Arial",
+                        "fontSize": 36,
+                        "color": "#ffffff",
+                        "opacity": 1
+                    },
+                    // Side length texts
+                    {
+                        "id": "len_a",
+                        "type": "text",
+                        "content": "a",
+                        "x": 400,
+                        "y": 840,
+                        "unit": "px",
+                        "font": "Arial",
+                        "fontSize": 28,
+                        "color": "#ffd700",
+                        "opacity": 0,
+                        "align": "center"
+                    },
+                    {
+                        "id": "len_b",
+                        "type": "text",
+                        "content": "b",
+                        "x": 480,
+                        "y": 550,
+                        "unit": "px",
+                        "font": "Arial",
+                        "fontSize": 28,
+                        "color": "#ffd700",
+                        "opacity": 0,
+                        "align": "center"
+                    },
+                    {
+                        "id": "len_c",
+                        "type": "text",
+                        "content": "c",
+                        "x": 270,
+                        "y": 550,
+                        "unit": "px",
+                        "font": "Arial",
+                        "fontSize": 28,
+                        "color": "#ffd700",
+                        "opacity": 0,
+                        "align": "center"
+                    },
+                    // Angle gamma text again
+                    {
+                        "id": "angle_arc",
+                        "type": "text",
+                        "content": "γ",
+                        "x": 580,
+                        "y": 760,
+                        "unit": "px",
+                        "font": "Georgia",
+                        "fontSize": 28,
+                        "color": "#f0e68c",
+                        "opacity": 1
+                    },
+                    // Formula stays
+                    {
+                        "id": "formula",
+                        "type": "text",
+                        "content": "c² = a² + b² − 2ab cos(γ)",
+                        "x": 0.5,
+                        "y": 0.2,
+                        "unit": "percent",
+                        "font": "Arial",
+                        "fontSize": 40,
+                        "color": "#e94560",
+                        "opacity": 1,
+                        "align": "center"
+                    }
+                ],
+                "animations": [
+                    // Show side length labels with a bounce
+                    {
+                        "target": "len_a",
+                        "property": "opacity",
+                        "from": 0,
+                        "to": 1,
+                        "startDelay": 0.5,
+                        "duration": 0.5,
+                        "easing": "bounce.out"
+                    },
+                    {
+                        "target": "len_b",
+                        "property": "opacity",
+                        "from": 0,
+                        "to": 1,
+                        "startDelay": 1.0,
+                        "duration": 0.5,
+                        "easing": "bounce.out"
+                    },
+                    {
+                        "target": "len_c",
+                        "property": "opacity",
+                        "from": 0,
+                        "to": 1,
+                        "startDelay": 1.5,
+                        "duration": 0.5,
+                        "easing": "bounce.out"
+                    },
+                    // Pulse the formula
+                    {
+                        "target": "formula",
+                        "property": "fontSize",
+                        "from": 40,
+                        "to": 48,
+                        "startDelay": 2.5,
+                        "duration": 0.6,
+                        "easing": "power2.out"
+                    },
+                    {
+                        "target": "formula",
+                        "property": "fontSize",
+                        "from": 48,
+                        "to": 40,
+                        "startDelay": 3.1,
+                        "duration": 0.6,
+                        "easing": "power2.out"
+                    }
+                ]
+            },
+            // ─── SCENE 3: Drop the altitude to prove it ──────────────
+            {
+                "name": "Derivation",
+                "duration": 8,
+                "background": "#1a1a2e",
+                "elements": [
+                    // Triangle base
+                    {
+                        "id": "side_a",
+                        "type": "shape",
+                        "path": "M 200 800 L 600 800",
+                        "stroke": "#ffffff",
+                        "strokeWidth": 4,
+                        "opacity": 1
+                    },
+                    {
+                        "id": "side_b",
+                        "type": "shape",
+                        "path": "M 600 800 L 350 300",
+                        "stroke": "#ffffff",
+                        "strokeWidth": 4,
+                        "opacity": 1
+                    },
+                    {
+                        "id": "side_c",
+                        "type": "shape",
+                        "path": "M 200 800 L 350 300",
+                        "stroke": "#e94560",
+                        "strokeWidth": 6,
+                        "opacity": 1
+                    },
+                    // Altitude from B to side a (at point D, x=350, y=800)
+                    {
+                        "id": "altitude",
+                        "type": "shape",
+                        "path": "M 350 300 L 350 800",
+                        "stroke": "#00bcd4",
+                        "strokeWidth": 3,
+                        "strokeDasharray": "8 4", // dashed line
+                        "opacity": 0
+                    },
+                    // Right angle marker at D (small square)
+                    {
+                        "id": "right_angle",
+                        "type": "shape",
+                        "points": [
+                            {
+                                "x": 330,
+                                "y": 780,
+                                "unit": "px"
+                            },
+                            {
+                                "x": 350,
+                                "y": 780
+                            },
+                            {
+                                "x": 350,
+                                "y": 800
+                            }
+                        ],
+                        "stroke": "#ffffff",
+                        "strokeWidth": 2,
+                        "fill": "transparent",
+                        "opacity": 0
+                    },
+                    // Labels
+                    {
+                        "id": "label_A",
+                        "type": "text",
+                        "content": "A",
+                        "x": 140,
+                        "y": 820,
+                        "unit": "px",
+                        "font": "Arial",
+                        "fontSize": 36,
+                        "color": "#ffffff",
+                        "opacity": 1
+                    },
+                    {
+                        "id": "label_B",
+                        "type": "text",
+                        "content": "B",
+                        "x": 360,
+                        "y": 270,
+                        "unit": "px",
+                        "font": "Arial",
+                        "fontSize": 36,
+                        "color": "#ffffff",
+                        "opacity": 1
+                    },
+                    {
+                        "id": "label_C",
+                        "type": "text",
+                        "content": "C",
+                        "x": 640,
+                        "y": 820,
+                        "unit": "px",
+                        "font": "Arial",
+                        "fontSize": 36,
+                        "color": "#ffffff",
+                        "opacity": 1
+                    },
+                    {
+                        "id": "label_D",
+                        "type": "text",
+                        "content": "D",
+                        "x": 350,
+                        "y": 840,
+                        "unit": "px",
+                        "font": "Arial",
+                        "fontSize": 28,
+                        "color": "#00bcd4",
+                        "opacity": 0,
+                        "align": "center"
+                    },
+                    // Segment labels
+                    {
+                        "id": "seg_x",
+                        "type": "text",
+                        "content": "x",
+                        "x": 275,
+                        "y": 820,
+                        "unit": "px",
+                        "font": "Arial",
+                        "fontSize": 24,
+                        "color": "#ffd700",
+                        "opacity": 0,
+                        "align": "center"
+                    },
+                    {
+                        "id": "seg_a-x",
+                        "type": "text",
+                        "content": "a−x",
+                        "x": 475,
+                        "y": 820,
+                        "unit": "px",
+                        "font": "Arial",
+                        "fontSize": 24,
+                        "color": "#ffd700",
+                        "opacity": 0,
+                        "align": "center"
+                    },
+                    // Dynamic equations at the top
+                    {
+                        "id": "eq1",
+                        "type": "text",
+                        "content": "h² = c² − x²",
+                        "x": 0.5,
+                        "y": 0.1,
+                        "unit": "percent",
+                        "font": "Arial",
+                        "fontSize": 32,
+                        "color": "#ffffff",
+                        "opacity": 0,
+                        "align": "center"
+                    },
+                    {
+                        "id": "eq2",
+                        "type": "text",
+                        "content": "h² = b² − (a−x)²",
+                        "x": 0.5,
+                        "y": 0.2,
+                        "unit": "percent",
+                        "font": "Arial",
+                        "fontSize": 32,
+                        "color": "#ffffff",
+                        "opacity": 0,
+                        "align": "center"
+                    },
+                    {
+                        "id": "final",
+                        "type": "text",
+                        "content": "⇒ c² = a² + b² − 2ab cos(γ)",
+                        "x": 0.5,
+                        "y": 0.8,
+                        "unit": "percent",
+                        "font": "Arial",
+                        "fontSize": 44,
+                        "color": "#e94560",
+                        "opacity": 0,
+                        "align": "center"
+                    }
+                ],
+                "animations": [
+                    // Drop altitude
+                    {
+                        "target": "altitude",
+                        "property": "opacity",
+                        "from": 0,
+                        "to": 1,
+                        "startDelay": 0.3,
+                        "duration": 0.6
+                    },
+                    {
+                        "target": "label_D",
+                        "property": "opacity",
+                        "from": 0,
+                        "to": 1,
+                        "startDelay": 0.5,
+                        "duration": 0.5
+                    },
+                    {
+                        "target": "right_angle",
+                        "property": "opacity",
+                        "from": 0,
+                        "to": 1,
+                        "startDelay": 0.6,
+                        "duration": 0.4
+                    },
+                    // Show segment labels
+                    {
+                        "target": "seg_x",
+                        "property": "opacity",
+                        "from": 0,
+                        "to": 1,
+                        "startDelay": 1.2,
+                        "duration": 0.3
+                    },
+                    {
+                        "target": "seg_a-x",
+                        "property": "opacity",
+                        "from": 0,
+                        "to": 1,
+                        "startDelay": 1.5,
+                        "duration": 0.3
+                    },
+                    // Reveal equations step by step
+                    {
+                        "target": "eq1",
+                        "property": "opacity",
+                        "from": 0,
+                        "to": 1,
+                        "startDelay": 2.2,
+                        "duration": 0.5
+                    },
+                    {
+                        "target": "eq2",
+                        "property": "opacity",
+                        "from": 0,
+                        "to": 1,
+                        "startDelay": 3.0,
+                        "duration": 0.5
+                    },
+                    // Final formula appears with a glow effect (color change)
+                    {
+                        "target": "final",
+                        "property": "opacity",
+                        "from": 0,
+                        "to": 1,
+                        "startDelay": 4.5,
+                        "duration": 0.8,
+                        "easing": "power2.out"
+                    },
+                    {
+                        "target": "final",
+                        "property": "color",
+                        "from": "#e94560",
+                        "to": "#ffffff",
+                        "startDelay": 5.5,
+                        "duration": 0.5
+                    },
+                    {
+                        "target": "final",
+                        "property": "color",
+                        "from": "#ffffff",
+                        "to": "#e94560",
+                        "startDelay": 6.0,
+                        "duration": 0.5
+                    }
+                ]
+            },
+            // ─── SCENE 4: Real‑world example ─────────────────────────
+            {
+                "name": "Example Calculation",
+                "duration": 5,
+                "background": "#0d0d1a",
+                "elements": [
+                    {
+                        "id": "example_title",
+                        "type": "text",
+                        "content": "Example: Find c\nwhen a=5, b=7, and γ=60°",
+                        "x": 0.5,
+                        "y": 0.25,
+                        "unit": "percent",
+                        "font": "Arial",
+                        "fontSize": 44,
+                        "color": "#ffffff",
+                        "opacity": 0,
+                        "align": "center",
+                        "lineHeight": 1.4
+                    },
+                    {
+                        "id": "sub",
+                        "type": "text",
+                        "content": "c = √(5² + 7² − 2·5·7·cos 60°)\n    = √(25 + 49 − 70·0.5)\n    = √(74 − 35) = √39 ≈ 6.24",
+                        "x": 0.5,
+                        "y": 0.55,
+                        "unit": "percent",
+                        "font": "Courier New, monospace",
+                        "fontSize": 36,
+                        "color": "#e0e0e0",
+                        "opacity": 0,
+                        "align": "center",
+                        "lineHeight": 1.6
+                    },
+                    {
+                        "id": "result",
+                        "type": "text",
+                        "content": "c ≈ 6.24",
+                        "x": 0.5,
+                        "y": 0.8,
+                        "unit": "percent",
+                        "font": "Arial",
+                        "fontSize": 60,
+                        "color": "#e94560",
+                        "opacity": 0,
+                        "align": "center"
+                    }
+                ],
+                "animations": [
+                    {
+                        "target": "example_title",
+                        "property": "opacity",
+                        "to": 1,
+                        "startDelay": 0.3,
+                        "duration": 0.8
+                    },
+                    {
+                        "target": "sub",
+                        "property": "opacity",
+                        "to": 1,
+                        "startDelay": 1.5,
+                        "duration": 1.0
+                    },
+                    {
+                        "target": "result",
+                        "property": "opacity",
+                        "to": 1,
+                        "startDelay": 3.0,
+                        "duration": 0.7,
+                        "easing": "back.out(1.7)"
+                    }
+                ]
+            }
+        ]
+    }
+}
