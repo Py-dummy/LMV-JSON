@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> LVM </title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script> <!-- GSAP -->
+</head>
+
+<body>
+    <div id="app">
+
+        <div id="controls">
+            <textarea id="dsl-input" placeholder="Paste your JSON DSL here..." rows="12"></textarea>
+            <button id="play-btn">▶ Play</button>
+        </div>
+
+        <!-- Canvas will be inserted here by JS, or we can place it statically -->
+        <canvas id="video-canvas"></canvas>
+    </div>
+
+    <script src="js/renderer.js"></script>
+</body>
+
+</html>
