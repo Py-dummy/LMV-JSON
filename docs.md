@@ -177,3 +177,4 @@ Full list: https://gsap.com/docs/v3/Eases/
 - For shapes, `points` creates a closed polygon; `path` gives exact control.
 - `unit` can be mixed: text with `"percent"`, shapes with `"px"`.
 - GSAP is used under the hood; any GSAP-compatible easing string works.
+- Respond with `.json`, excluding all comments.
